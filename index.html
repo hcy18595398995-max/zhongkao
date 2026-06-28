@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中考倒计时</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* ☀️ 阳光渐变 */
+    background: linear-gradient(135deg, #fff7ed, #e0f2fe);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #0f172a;
+  }
+
+  .box {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    color: #0f172a;
+  }
+
+  .timer {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .unit {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 20px;
+    border-radius: 14px;
+    min-width: 90px;
+
+    /* 轻微阴影，更“阳光卡片感” */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .num {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0284c7;
+  }
+
+  .label {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 5px;
+  }
+
+  .footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #64748b;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <div class="title">中考倒计时</div>
+
+  <div class="timer">
+    <div class="unit">
+      <div class="num" id="days">0</div>
+      <div class="label">天</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="hours">0</div>
+      <div class="label">小时</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="minutes">0</div>
+      <div class="label">分钟</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="seconds">0</div>
+      <div class="label">秒</div>
+    </div>
+  </div>
+
+  <div class="footer">每一秒都在靠近更好的自己</div>
+</div>
+
+<script>
+const examDate = new Date(2027, 5, 20, 8, 0, 0);
+
+function update() {
+  const now = new Date();
+  let diff = examDate - now;
+
+  if (diff < 0) diff = 0;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+update();
+setInterval(update, 1000);
+</script>
+
+</body>
+</html>
